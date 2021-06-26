@@ -15,11 +15,33 @@ class DistrictController extends Controller
         {
             return response()->json([
                 'status' => 'not found',
+                'endpoint' => url(''),
                 'time' => Carbon::now('Asia/Jakarta'),
             ]);
         }
         return response()->json([
             'status' => 'success',
+            'endpoint' => url(''),
+            'time' => Carbon::now('Asia/Jakarta'),
+            'data' => $data,
+        ], 200);
+    }
+
+    public function spesific(Request $request)
+    {
+        $data = District::find($request->district_id);
+        if($data == null)
+        {
+            return response()->json([
+                'status' => 'not found',
+                'endpoint' => url(''),
+                'time' => Carbon::now('Asia/Jakarta'),
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'endpoint' => url(''),
             'time' => Carbon::now('Asia/Jakarta'),
             'data' => $data,
         ], 200);
